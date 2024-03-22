@@ -391,4 +391,1776 @@ Features_40CO2['gamma_CS'][0] = 1
 Features_40CO2['noiseGammaRate'][0] = 1
 print("FeaturesDataFrame(Scans_40CO2) = ", FeaturesDataFrame(Scans_40CO2))
 
-#[In]12
+canvas = TCanvas("c", "c", 564, 232, 600, 600)
+        
+_40CO2 = TGraphErrors(6, 
+                   Features_40CO2['noiseGammaRate'].values/(Features_40CO2['gamma_CS'].values*1000), 
+                   Features_40CO2['current'].values,
+                   0,
+                   0) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_40CO2.SetMarkerColor(2)
+_40CO2.SetMarkerStyle(20)
+
+_30CO2 = TGraphErrors(8, 
+                   Features_30CO2['noiseGammaRate'].values/(Features_30CO2['gamma_CS'].values*1000), 
+                   Features_30CO2['current'].values,
+                   0,
+                   0) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO2.SetMarkerColor(4)
+_30CO2.SetMarkerStyle(21)
+
+_30CO205SF6 = TGraphErrors(8, 
+                   Features_30CO205SF6['noiseGammaRate'].values/(Features_30CO205SF6['gamma_CS'].values*1000), 
+                   Features_30CO205SF6['current'].values,
+                   0,
+                   0) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO205SF6.SetMarkerColor(6)
+_30CO205SF6.SetMarkerStyle(22)
+
+STDMX = TGraphErrors(8, 
+                   Features_STDMX['noiseGammaRate'].values/(Features_STDMX['gamma_CS'].values*1000), 
+                   Features_STDMX['current'].values,
+                   0,
+                   0) #values from df[].values to convert dataframe object in array suitable for the tgraph
+STDMX.SetMarkerColor(1)
+STDMX.SetMarkerStyle(34)
+
+_30CO205SF6.SetTitle("")
+_30CO205SF6.GetXaxis().SetTitle("Hit background gamma rate [kHz/cm2]")
+_30CO205SF6.GetYaxis().SetTitle("Current (uA)")
+_30CO205SF6.GetYaxis().SetTitleOffset(1.2)
+_30CO205SF6.Draw("AP")
+_40CO2.Draw("PSAME")
+_30CO2.Draw("PSAME")
+STDMX.Draw("PSAME")
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.10, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.12, 0.72, 0.3, 0.89);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.025); 
+legend.AddEntry(STDMX, "95.2% TFE + 4.5% iC4H10 + 0.3% SF6", "P");
+legend.AddEntry(_30CO2, "64% TFE + 30% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_40CO2, "54% TFE + 40% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_30CO205SF6, "64.5% TFE + 30% CO2 + 5.0% iC4H10 + 0.5% SF6", "P");
+legend.Draw();
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.03);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(0.8, 27, "Test Beam in April+July 2023");
+ltx_data.DrawLatex(0.8, 23, "1.4 mm double gap RPC");
+ltx_data.DrawLatex(0.8, 19, "Threshold = 60 [fC]")
+ltx_data.Draw()
+
+canvas.Draw()
+canvas.SaveAs("current.png")
+
+canvas = TCanvas("c", "c", 564, 232, 600, 600)
+        
+_40CO2 = TGraphErrors(6, 
+                   Features_40CO2['noiseGammaRate'].values/(Features_40CO2['gamma_CS'].values*1000), 
+                   Features_40CO2['current'].values/2070.5,
+                   0,
+                   0) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_40CO2.SetMarkerColor(2)
+_40CO2.SetMarkerStyle(20)
+
+_30CO2 = TGraphErrors(8, 
+                   Features_30CO2['noiseGammaRate'].values/(Features_30CO2['gamma_CS'].values*1000), 
+                   Features_30CO2['current'].values/2070.5,
+                   0,
+                   0) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO2.SetMarkerColor(4)
+_30CO2.SetMarkerStyle(21)
+
+_30CO205SF6 = TGraphErrors(8, 
+                   Features_30CO205SF6['noiseGammaRate'].values/(Features_30CO205SF6['gamma_CS'].values*1000), 
+                   Features_30CO205SF6['current'].values/2070.5,
+                   0,
+                   0) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO205SF6.SetMarkerColor(6)
+_30CO205SF6.SetMarkerStyle(22)
+
+STDMX = TGraphErrors(8, 
+                   Features_STDMX['noiseGammaRate'].values/(Features_STDMX['gamma_CS'].values*1000), 
+                   Features_STDMX['current'].values/2070.5,
+                   0,
+                   0) #values from df[].values to convert dataframe object in array suitable for the tgraph
+STDMX.SetMarkerColor(1)
+STDMX.SetMarkerStyle(34)
+
+_30CO205SF6.SetTitle("")
+_30CO205SF6.GetXaxis().SetTitle("Background gamma rate [kHz/cm^{2}]")
+_30CO205SF6.GetYaxis().SetTitle("Current density (uA/cm^{2})")
+_30CO205SF6.GetYaxis().SetTitleOffset(1.45)
+_30CO205SF6.GetYaxis().SetMaxDigits(3)
+_30CO205SF6.Draw("AP")
+STDMX.Draw("PSAME")
+_40CO2.Draw("PSAME")
+_30CO2.Draw("PSAME")
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.1, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.12, 0.72, 0.3, 0.89);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.025); 
+legend.AddEntry(STDMX, "95.2% TFE + 4.5% iC4H10 + 0.3% SF6", "P");
+legend.AddEntry(_30CO2, "64% TFE + 30% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_40CO2, "54% TFE + 40% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_30CO205SF6, "64.5% TFE + 30% CO2 + 5.0% iC4H10 + 0.5% SF6", "P");
+legend.Draw();
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.03);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(0.75, 0.02, "Test Beam in August 2023");
+ltx_data.DrawLatex(0.75, 0.015, "1.4 mm double gap RPC");
+ltx_data.DrawLatex(0.75, 0.01, "Threshold = 60 [fC]");
+ltx_data.Draw()
+
+canvas.Draw()
+canvas.SaveAs("density_current.png")
+canvas.SaveAs("density_current.pdf")
+
+canvas = TCanvas("c", "c", 564, 232, 600, 600)
+    
+_40CO2_charge = 1000000*Features_40CO2['current'].values/(2*2070.5*Features_40CO2['noiseGammaRate'].values/Features_40CO2['gamma_CS'].values)
+_40CO2_charge[0] = 0
+_40CO2_charge_err = (1000000*Features_40CO2['current'].values/(2*2070.5))*(Features_40CO2['gamma_CS_err'].values/Features_40CO2['noiseGammaRate'].values) 
+_40CO2 = TGraphErrors(6, 
+                   Features_40CO2['noiseGammaRate'].values/(Features_40CO2['gamma_CS'].values*1000), 
+                   _40CO2_charge,
+                   0,
+                   _40CO2_charge_err) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_40CO2.SetMarkerColor(2)
+_40CO2.SetMarkerStyle(20)
+
+_30CO2_charge = 1000000*Features_30CO2['current'].values/(2*2070.5*Features_30CO2['noiseGammaRate'].values/Features_30CO2['gamma_CS'].values)
+_30CO2_charge[0] = 0
+_30CO2_charge_err = (1000000*Features_30CO2['current'].values/(2*2070.5))*(Features_30CO2['gamma_CS_err'].values/Features_30CO2['noiseGammaRate'].values) 
+
+_30CO2 = TGraphErrors(8, 
+                   Features_30CO2['noiseGammaRate'].values/(Features_30CO2['gamma_CS'].values*1000), 
+                   _30CO2_charge,
+                   0,
+                   _30CO2_charge_err) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO2.SetMarkerColor(4)
+_30CO2.SetMarkerStyle(21)
+
+_30CO205SF6_charge = 1000000*Features_30CO205SF6['current'].values/(2*2070.5*Features_30CO205SF6['noiseGammaRate'].values/Features_30CO205SF6['gamma_CS'].values)
+_30CO205SF6_charge[0] = 0
+_30CO205SF6_charge_err = (1000000*Features_30CO205SF6['current'].values/(2*2070.5))*(Features_30CO205SF6['gamma_CS_err'].values/Features_30CO205SF6['noiseGammaRate'].values) 
+
+_30CO205SF6 = TGraphErrors(8, 
+                   Features_30CO205SF6['noiseGammaRate'].values/(Features_30CO205SF6['gamma_CS'].values*1000), 
+                   _30CO205SF6_charge,
+                   0,
+                   _30CO205SF6_charge_err) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO205SF6.SetMarkerColor(6)
+_30CO205SF6.SetMarkerStyle(22)
+
+STDMX_charge = 1000000*Features_STDMX['current'].values/(2*2070.5*Features_STDMX['noiseGammaRate'].values/Features_STDMX['gamma_CS'].values)
+STDMX_charge[0] = 0
+STDMX_charge_err = (1000000*Features_STDMX['current'].values/(2*2070.5))*(Features_STDMX['gamma_CS_err'].values/Features_STDMX['noiseGammaRate'].values) 
+
+STDMX = TGraphErrors(8, 
+                   Features_STDMX['noiseGammaRate'].values/(Features_STDMX['gamma_CS'].values*1000), 
+                   STDMX_charge,
+                   0,
+                   STDMX_charge_err) #values from df[].values to convert dataframe object in array suitable for the tgraph
+STDMX.SetMarkerColor(1)
+STDMX.SetMarkerStyle(34)
+
+_30CO205SF6.SetTitle("")
+_30CO205SF6.GetXaxis().SetTitle("Background gamma rate [kHz/cm^{2}]")
+_30CO205SF6.GetYaxis().SetTitle("Mean gamma charge (pC)")
+_30CO205SF6.GetYaxis().SetTitleOffset(1.2)
+_30CO205SF6.GetYaxis().SetRangeUser(10., 45.)
+_30CO205SF6.GetYaxis().SetMaxDigits(3)
+_30CO205SF6.Draw("AP")
+_30CO2.Draw("PSAME")
+_40CO2.Draw("PSAME")
+STDMX.Draw("PSAME")
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.10, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.12, 0.72, 0.3, 0.89);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.025); 
+legend.AddEntry(STDMX, "95.2% TFE + 4.5% iC4H10 + 0.3% SF6", "P");
+legend.AddEntry(_30CO2, "64% TFE + 30% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_40CO2, "54% TFE + 40% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_30CO205SF6, "64.5% TFE + 30% CO2 + 5.0% iC4H10 + 0.5% SF6", "P");
+legend.Draw();
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.03);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(0.8, 16., "Test Beam in August 2023");
+ltx_data.DrawLatex(0.8, 14., "1.4 mm double gap RPC");
+ltx_data.DrawLatex(0.8, 12., "Threshold = 60 [fC]");
+ltx_data.Draw()
+
+canvas.Draw()
+canvas.SaveAs("charge.png")
+
+canvas = TCanvas("c", "c", 564, 232, 600, 600)
+        
+_40CO2 = TGraphErrors(6, 
+                   Features_40CO2['noiseGammaRate'].values/(Features_40CO2['gamma_CS'].values*1000), 
+                   0.75*Features_40CO2['current'].values,
+                   0,
+                   0) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_40CO2.SetMarkerColor(2)
+_40CO2.SetMarkerStyle(20)
+
+_30CO2 = TGraphErrors(8, 
+                   Features_30CO2['noiseGammaRate'].values/(Features_30CO2['gamma_CS'].values*1000), 
+                   0.75*Features_30CO2['current'].values,
+                   0,
+                   0) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO2.SetMarkerColor(4)
+_30CO2.SetMarkerStyle(21)
+
+_30CO205SF6 = TGraphErrors(8, 
+                   Features_30CO205SF6['noiseGammaRate'].values/(Features_30CO205SF6['gamma_CS'].values*1000), 
+                   0.75*Features_30CO205SF6['current'].values,
+                   0,
+                   0) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO205SF6.SetMarkerColor(6)
+_30CO205SF6.SetMarkerStyle(22)
+
+STDMX = TGraphErrors(8, 
+                   Features_STDMX['noiseGammaRate'].values/(Features_STDMX['gamma_CS'].values*1000), 
+                   0.75*Features_STDMX['current'].values,
+                   0,
+                   0) #values from df[].values to convert dataframe object in array suitable for the tgraph
+STDMX.SetMarkerColor(1)
+STDMX.SetMarkerStyle(34)
+
+_30CO205SF6.SetTitle("")
+_30CO205SF6.GetXaxis().SetTitle("Hit background gamma rate [kHz/cm2]")
+_30CO205SF6.GetYaxis().SetTitle("R x I (V)")
+_30CO205SF6.GetYaxis().SetTitleOffset(1.2)
+_30CO205SF6.Draw("AP")
+_30CO2.Draw("PSAME")
+_40CO2.Draw("PSAME")
+STDMX.Draw("PSAME")
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.10, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.12, 0.72, 0.3, 0.89);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.025); 
+legend.AddEntry(STDMX, "95.2% TFE + 4.5% iC4H10 + 0.3% SF6", "P");
+legend.AddEntry(_30CO2, "64% TFE + 30% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_40CO2, "54% TFE + 40% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_30CO205SF6, "64.5% TFE + 30% CO2 + 5.0% iC4H10 + 0.5% SF6", "P");
+legend.Draw();
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.03);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(0.8, 27, "Test Beam in April+July 2023");
+ltx_data.DrawLatex(0.8, 23, "1.4 mm double gap RPC");
+ltx_data.DrawLatex(0.8, 19, "Threshold = 60 [fC]");
+ltx_data.Draw()
+
+canvas.Draw()
+canvas.SaveAs("RXI.png")
+
+canvas = TCanvas("c", "c", 564, 232, 600, 600)
+        
+_40CO2 = TGraphErrors(6, 
+                   Features_40CO2['noiseGammaRate'].values/(Features_40CO2['gamma_CS'].values*1000), 
+                   Features_40CO2['muon_CM'].values,
+                   0,
+                   Features_40CO2['muon_CM_err'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_40CO2.SetMarkerColor(2)
+_40CO2.SetMarkerStyle(20)
+
+_30CO2 = TGraphErrors(8, 
+                   Features_30CO2['noiseGammaRate'].values/(Features_30CO2['gamma_CS'].values*1000), 
+                   Features_30CO2['muon_CM'].values,
+                   0,
+                   Features_30CO2['muon_CM_err'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO2.SetMarkerColor(4)
+_30CO2.SetMarkerStyle(21)
+
+_30CO205SF6 = TGraphErrors(8, 
+                   Features_30CO205SF6['noiseGammaRate'].values/(Features_30CO205SF6['gamma_CS'].values*1000), 
+                   Features_30CO205SF6['muon_CM'].values,
+                   0,
+                   Features_30CO205SF6['muon_CM_err'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO205SF6.SetMarkerColor(6)
+_30CO205SF6.SetMarkerStyle(22)
+
+STDMX = TGraphErrors(8, 
+                   Features_STDMX['noiseGammaRate'].values/(Features_STDMX['gamma_CS'].values*1000), 
+                   Features_STDMX['muon_CM'].values,
+                   0,
+                   Features_STDMX['muon_CM_err'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+STDMX.SetMarkerColor(1)
+STDMX.SetMarkerStyle(34)
+
+_30CO205SF6.SetTitle("")
+_30CO205SF6.GetXaxis().SetTitle("Background gamma rate [kHz/cm2]")
+_30CO205SF6.GetYaxis().SetTitle("Muon Cluster Multiplicity")
+_30CO205SF6.GetYaxis().SetTitleOffset(1.4)
+_30CO205SF6.GetYaxis().SetRangeUser(0.4, 2.)
+_30CO205SF6.Draw("AP")
+_30CO2.Draw("PSAME")
+_40CO2.Draw("PSAME")
+STDMX.Draw("PSAME")
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.10, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.12, 0.72, 0.3, 0.89);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.025); 
+legend.AddEntry(STDMX,  "95.2% TFE + 4.5% iC4H10 + 0.3% SF6", "P");
+legend.AddEntry(_30CO2, "64% TFE + 30% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_40CO2, "54% TFE + 40% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_30CO205SF6, "64.5% TFE + 30% CO2 + 5.0% iC4H10 + 0.5% SF6", "P");
+legend.Draw();
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.03);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(0.6, 0.74, "Test Beam in April+July 2023");
+ltx_data.DrawLatex(0.6, 0.67, "1.4 mm double gap RPC");
+ltx_data.DrawLatex(0.6, 0.6, "Threshold = 60 [fC]");
+ltx_data.Draw()
+
+canvas.Draw()
+canvas.SaveAs("MuonCM.png")
+
+canvas = TCanvas("c", "c", 564, 232, 600, 600)
+        
+_40CO2 = TGraphErrors(8, 
+                   Features_40CO2['noiseGammaRate'].values/(Features_40CO2['gamma_CS'].values*1000), 
+                   Features_40CO2['gamma_CM'].values,
+                   0,
+                   Features_40CO2['gamma_CM_err'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_40CO2.SetMarkerColor(2)
+_40CO2.SetMarkerStyle(20)
+
+_30CO2 = TGraphErrors(8, 
+                   Features_30CO2['noiseGammaRate'].values/(Features_30CO2['gamma_CS'].values*1000), 
+                   Features_30CO2['gamma_CM'].values,
+                   0,
+                   Features_30CO2['gamma_CM_err'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO2.SetMarkerColor(4)
+_30CO2.SetMarkerStyle(21)
+
+_30CO205SF6 = TGraphErrors(8, 
+                   Features_30CO205SF6['noiseGammaRate'].values/(Features_30CO205SF6['gamma_CS'].values*1000), 
+                   Features_30CO205SF6['gamma_CM'].values,
+                   0,
+                   Features_30CO205SF6['gamma_CM_err'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO205SF6.SetMarkerColor(6)
+_30CO205SF6.SetMarkerStyle(22)
+
+STDMX = TGraphErrors(8, 
+                   Features_STDMX['noiseGammaRate'].values/(Features_STDMX['gamma_CS'].values*1000), 
+                   Features_STDMX['gamma_CM'].values,
+                   0,
+                   Features_STDMX['gamma_CM_err'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+STDMX.SetMarkerColor(1)
+STDMX.SetMarkerStyle(34)
+
+_30CO205SF6.SetTitle("")
+_30CO205SF6.GetXaxis().SetTitle("Hit background gamma rate [kHz/cm2]")
+_30CO205SF6.GetYaxis().SetTitle("Gamma Cluster Multiplicity")
+_30CO205SF6.GetYaxis().SetTitleOffset(1.2)
+_30CO205SF6.Draw("AP")
+_30CO2.Draw("PSAME")
+_40CO2.Draw("PSAME")
+STDMX.Draw("PSAME")
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.10, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.12, 0.72, 0.3, 0.89);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.025); 
+legend.AddEntry(STDMX, "95.2% TFE + 4.5% iC4H10 + 0.3% SF6", "P");
+legend.AddEntry(_30CO2, "64% TFE + 30% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_40CO2, "54% TFE + 40% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_30CO205SF6, "64.5% TFE + 30% CO2 + 5.0% iC4H10 + 0.5% SF6", "P");
+legend.Draw();
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.03);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(0.8, 3.3, "Test Beam in April+July 2023");
+ltx_data.DrawLatex(0.8, 2.8, "1.4 mm double gap RPC");
+ltx_data.DrawLatex(0.8, 2.3, "Threshold = 60 [fC]");
+ltx_data.Draw()
+
+canvas.Draw()
+canvas.SaveAs("GammaCM.png")
+
+canvas = TCanvas("c", "c", 564, 232, 600, 600)
+        
+_40CO2 = TGraphErrors(8, 
+                   Features_40CO2['noiseGammaRate'].values/(Features_40CO2['gamma_CS'].values*1000), 
+                   Features_40CO2['gamma_CS'].values,
+                   0,
+                   Features_40CO2['gamma_CS_err'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_40CO2.SetMarkerColor(2)
+_40CO2.SetMarkerStyle(20)
+
+
+_30CO205SF6 = TGraphErrors(8, 
+                   Features_30CO205SF6['noiseGammaRate'].values/(Features_30CO2['gamma_CS'].values*1000), 
+                   Features_30CO205SF6['gamma_CS'].values,
+                   0,
+                   Features_30CO205SF6['gamma_CS_err'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO205SF6.SetMarkerColor(6)
+_30CO205SF6.SetMarkerStyle(22)
+
+_30CO2 = TGraphErrors(8, 
+                   Features_30CO2['noiseGammaRate'].values/(Features_30CO205SF6['gamma_CS'].values*1000), 
+                   Features_30CO2['gamma_CS'].values,
+                   0,
+                   Features_30CO2['gamma_CS_err'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO2.SetMarkerColor(4)
+_30CO2.SetMarkerStyle(21)
+
+STDMX = TGraphErrors(8, 
+                   Features_STDMX['noiseGammaRate'].values/(Features_STDMX['gamma_CS'].values*1000), 
+                   Features_STDMX['gamma_CS'].values,
+                   0,
+                   Features_STDMX['gamma_CS_err'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+STDMX.SetMarkerColor(1)
+STDMX.SetMarkerStyle(34)
+
+_30CO205SF6.SetTitle("")
+_30CO205SF6.GetXaxis().SetTitle("Background gamma rate [kHz/cm2]")
+_30CO205SF6.GetYaxis().SetTitle("Gamma Cluster Size")
+_30CO205SF6.GetYaxis().SetTitleOffset(1.5)
+_30CO205SF6.GetYaxis().SetRangeUser(1.01, 3.5)
+_30CO205SF6.Draw("AP")
+_30CO2.Draw("PSAME")
+_40CO2.Draw("PSAME")
+STDMX.Draw("PSAME")
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.10, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.15, 0.73, 0.6, 0.88);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.025); 
+legend.AddEntry(STDMX, "95.2% TFE + 4.5% iC4H10 + 0.3% SF6", "P");
+legend.AddEntry(_30CO2, "64% TFE + 30% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_40CO2, "54% TFE + 40% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_30CO205SF6, "64.5% TFE + 30% CO2 + 5.0% iC4H10 + 0.5% SF6", "P");
+legend.Draw();
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.03);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(1.2, 2.5, "Test Beam in August 2023");
+ltx_data.DrawLatex(1.2, 2.4, "1.4 mm double gap RPC");
+ltx_data.DrawLatex(1.2, 2.3, "Threshold = 60 [fC]");
+ltx_data.Draw()
+
+canvas.Draw()
+canvas.SaveAs("GammaCS.png")
+
+canvas = TCanvas("c", "c", 564, 232, 600, 600)
+
+print("Features_40CO2['eff_error'].values = ", Features_40CO2['eff_error'].values)
+
+_40CO2 = TGraphErrors(6, 
+                   Features_40CO2['noiseGammaRate'].values/(Features_40CO2['gamma_CS'].values*1000), 
+                   Features_40CO2['efficiency'].values,
+                   0,
+                   Features_40CO2['eff_error'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_40CO2.SetMarkerColor(2)
+_40CO2.SetMarkerStyle(20)
+
+_30CO2 = TGraphErrors(8, 
+                   Features_30CO2['noiseGammaRate'].values/(Features_30CO2['gamma_CS'].values*1000), 
+                   Features_30CO2['efficiency'].values,
+                   0,
+                   Features_30CO2['eff_error'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO2.SetMarkerColor(4)
+_30CO2.SetMarkerStyle(21)
+
+
+_30CO205SF6 = TGraphErrors(8, 
+                   Features_30CO205SF6['noiseGammaRate'].values/(Features_30CO205SF6['gamma_CS'].values*1000), 
+                   Features_30CO205SF6['efficiency'].values,
+                   0,
+                   Features_30CO205SF6['eff_error'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO205SF6.SetMarkerColor(6)
+_30CO205SF6.SetMarkerStyle(22)
+
+STDMX = TGraphErrors(8, 
+                   Features_STDMX['noiseGammaRate'].values/(Features_STDMX['gamma_CS'].values*1000), 
+                   Features_STDMX['efficiency'].values,
+                   0,
+                   Features_STDMX['eff_error'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+STDMX.SetMarkerColor(1)
+STDMX.SetMarkerStyle(34)
+
+_30CO2.GetHistogram().SetMaximum(100)
+_30CO2.SetTitle("")
+_30CO2.GetXaxis().SetTitle("Hit background gamma rate [kHz/cm^{2}]")
+_30CO2.GetYaxis().SetTitle("Efficiency (%)")
+_30CO2.GetYaxis().SetTitleOffset(1.5)
+_30CO2.Draw("AP")
+_40CO2.Draw("PSAME")
+_30CO205SF6.Draw("PSAME")
+STDMX.Draw("PSAME")
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.10, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.35, 0.72, 0.5, 0.89);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.025); 
+legend.AddEntry(STDMX, "95.2% TFE + 4.5% iC4H10 + 0.3% SF6", "P");
+legend.AddEntry(_30CO2, "64% TFE + 30% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_40CO2, "54% TFE + 40% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_30CO205SF6, "64.5% TFE + 30% CO2 + 5.0% iC4H10 + 0.5% SF6", "P");
+legend.Draw();
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.03);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(0.2, 92.8, "Test Beam in April+July 2023");
+ltx_data.DrawLatex(0.2, 92.4, "1.4 mm double gap RPC");
+ltx_data.DrawLatex(0.2, 92., "Threshold = 60 [fC]");
+ltx_data.Draw()
+
+canvas.Draw()
+canvas.SaveAs("Efficiency.png")
+canvas.SaveAs("Efficiency.pdf")
+
+TGraphs_list_STDMX = []
+func_list_STDMX = []
+
+canvas = TCanvas("c", "c", 564, 232, 600, 600)
+HV_ref= 95
+
+k=1
+
+for scan, sigmoid, color, marker in scans_STDMX:
+    n = len(HVCurrentDataFrame(scans[scan])['HV_top'])
+        
+    gr_E = TGraphErrors(n, 
+                    #HVCurrentDataFrame(scans[scan])['HV_top'].values - HVCurrentDataFrame(scans[scan])['deltaV'].values, 
+                    HVCurrentDataFrame(scans[scan])['HV_top'].values, 
+                    HVCurrentDataFrame(scans[scan])['efficiency'].values,
+                    #HVCurrentDataFrame(scans[scan])['deltaV_err'].values,
+                    0,
+                    HVCurrentDataFrame(scans[scan])['eff_error'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+    gr_E.Fit(sigmoid) # FIT the graph with the sigmoid
+    sigmoid.SetLineColor(color)
+    gr_E.SetMarkerColor(color)
+    gr_E.SetMarkerStyle(marker)
+    #estrazione valori da fit
+    sig= gr_E.GetFunction("sigmoid"+str(k))
+    sig.SetLineColor(color)
+
+    Emax=sig.GetParameter(0)
+    Emax_err=sig.GetParError(0)     
+
+    Lambda=sig.GetParameter(1)    
+    Lambda_err=sig.GetParError(1)      
+
+    HV50=sig.GetParameter(2)
+    HV50_err=sig.GetParError(2)      
+    print("Lambda = ", Lambda)
+    HV95=sig.GetX(HV_ref)
+    HV95_err= math.sqrt(((math.log(19)/Lambda**2)*Lambda_err)**2 + HV50_err**2) #errore HV95
+    print("HV95_err = ", HV95_err)
+
+    #check print efficiency curves fitted
+    TGraphs_list_STDMX.append(gr_E)
+    func_list_STDMX.append(sig)
+    gr_E.Draw("AP")
+    k=k+1
+    #canvas.Draw()
+    canvas.SaveAs(scan+".png")
+
+canvas_all = TCanvas("c_all", "c_all", 0, 0, 600, 600)
+
+TGraphs_list_STDMX[0].GetHistogram().SetMaximum(1.4)
+TGraphs_list_STDMX[0].SetTitle("")
+TGraphs_list_STDMX[0].GetXaxis().SetTitle("HV_{eff} [V]")
+TGraphs_list_STDMX[0].GetYaxis().SetTitle("Muon Efficiency")
+TGraphs_list_STDMX[0].Draw("AP")
+TGraphs_list_STDMX[1].Draw("PSAME")
+TGraphs_list_STDMX[2].Draw("PSAME")
+TGraphs_list_STDMX[3].Draw("PSAME")
+TGraphs_list_STDMX[4].Draw("PSAME")
+
+Emax_STDMX = []
+Emax_err_STDMX = []
+Lambda_STDMX = []
+Lambda_err_STDMX = []
+HV50_STDMX = []
+HV50_err_STDMX = []
+HV95_STDMX = []
+HV95_err_STDMX = []
+
+for sig in func_list_STDMX:
+    Emax_ = 1 - math.sqrt((1 - sig.GetParameter(0)) * (1 - sig.GetParameter(0)))
+    Emax_STDMX.append(Emax_)
+    Emax_err_STDMX.append(sig.GetParError(0))     
+    Lambda_STDMX.append(sig.GetParameter(1))  
+    Lambda_err_STDMX.append(sig.GetParError(1))
+    HV50_STDMX.append(sig.GetParameter(2))  
+    HV50_err_STDMX.append(sig.GetParError(2)) 
+    HV95_STDMX.append(sig.GetX(HV_ref))
+    HV95_err_STDMX.append((math.log(19)/sig.GetParameter(1)**2)*sig.GetParError(1)+sig.GetParError(2))#errore HV95
+
+WP_STDMX = []    
+
+for Emax_, Lambda_, HV50_ in zip(Emax_STDMX, Lambda_STDMX, HV50_STDMX):
+    WP_STDMX.append((HV50_ - math.log(1/0.95-1)/Lambda_ + 150.))
+
+txt_STDMX_22 = Features_STDMX['noiseGammaRate'][2]/(Features_STDMX['gamma_CS'][2]*1000)
+txt_STDMX_10 = Features_STDMX['noiseGammaRate'][4]/(Features_STDMX['gamma_CS'][4]*1000)
+txt_STDMX_46 = Features_STDMX['noiseGammaRate'][5]/(Features_STDMX['gamma_CS'][5]*1000)
+txt_STDMX_33 = Features_STDMX['noiseGammaRate'][7]/(Features_STDMX['gamma_CS'][7]*1000)
+
+eff_1_STDMX = 'plateau = {a:.0%}, WP = {b:.2f} kV, no hit bkg gamma rate, Eff(WP) = {c:.0%}'.format(a=Emax_STDMX[0], b=WP_STDMX[0]/1000., c=(func_list_STDMX[0].Eval(WP_STDMX[0])));
+eff_2_STDMX = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_STDMX[1], b=WP_STDMX[1]/1000., c=(func_list_STDMX[1].Eval(WP_STDMX[1])), d=txt_STDMX_22);
+eff_3_STDMX = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_STDMX[2], b=WP_STDMX[2]/1000., c=(func_list_STDMX[2].Eval(WP_STDMX[2])), d=txt_STDMX_10);
+eff_4_STDMX = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_STDMX[3], b=WP_STDMX[3]/1000., c=(func_list_STDMX[3].Eval(WP_STDMX[3])), d=txt_STDMX_46);
+eff_5_STDMX = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_STDMX[4], b=WP_STDMX[4]/1000., c=(func_list_STDMX[4].Eval(WP_STDMX[4])), d=txt_STDMX_33);
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.10, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.1, 0.68, 0.3, 0.89);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.02376); 
+legend.AddEntry(TGraphs_list_STDMX[0], eff_1_STDMX, "P");
+legend.AddEntry(TGraphs_list_STDMX[1], eff_2_STDMX, "P");
+legend.AddEntry(TGraphs_list_STDMX[2], eff_3_STDMX, "P");
+legend.AddEntry(TGraphs_list_STDMX[3], eff_4_STDMX, "P");
+legend.AddEntry(TGraphs_list_STDMX[4], eff_5_STDMX, "P");
+legend.Draw();
+canvas_all.Draw()
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.025);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(6000, 0.88, "95.2% TFE + 4.5% iC4H10 + 0.3% SF6");
+ltx_data.DrawLatex(6000, 0.81, "Test Beam in April+July 2023");
+ltx_data.DrawLatex(6000, 0.74, "1.4 mm double gap RPC");
+ltx_data.DrawLatex(6000, 0.67, "Threshold = 60 [fC]");
+'''
+f3 = TF1("f3", "x", 0, 1.40);
+A3 = TGaxis(5900, 0, 5900, 1.4, "f3", 510, "");
+A3.SetTitle("Muon Efficiency [%]");
+A3.SetLabelSize(0.03);
+A3.SetTitleSize(0.03);
+A3.SetTitleOffset(1.3);
+A3.Draw();
+
+f4 = TF1("f4", "x", 5.9, 7.7);
+A4 = TGaxis(5900, 0, 7700, 0, "f4", 510, "");
+A4.SetTitle("HV_{eff} [kV]");
+A4.SetLabelSize(0.03);
+A4.SetTitleSize(0.03);
+A4.Draw();
+'''
+line = TLine(5850, 1., 7650, 1.);
+line.SetLineColor(1);
+line.SetLineStyle(9);
+line.SetLineWidth(2);
+line.Draw();
+
+canvas_all.cd()
+canvas_all.SaveAs("STDMX_eff.png")
+canvas_all.SaveAs("STDMX_eff.pdf")
+#canvas_all.SaveAs("Comp_AND_RPC22_SourceON_RES_CORR.pdf")
+
+TGraphs_list_30CO2 = []
+func_list_30CO2 = []
+
+canvas = TCanvas("c", "c", 564, 232, 600, 600)
+HV_ref= 95
+
+for scan, sigmoid, color, marker in scans_30CO2:
+    n = len(HVCurrentDataFrame(scans[scan])['HV_top'])
+        
+    gr_E = TGraphErrors(n, 
+                    HVCurrentDataFrame(scans[scan])['HV_top'].values, 
+                    HVCurrentDataFrame(scans[scan])['efficiency'].values,
+                    HVCurrentDataFrame(scans[scan])['deltaV_err'].values,
+                    HVCurrentDataFrame(scans[scan])['eff_error'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+    gr_E.Fit(sigmoid) # FIT the graph with the sigmoid
+    sigmoid.SetLineColor(color)
+    gr_E.SetMarkerColor(color)
+    gr_E.SetMarkerStyle(marker)
+    #estrazione valori da fit
+    sig= gr_E.GetFunction("sigmoid"+str(k))
+    sig.SetLineColor(color)    
+
+    Emax=sig.GetParameter(0)
+    Emax_err=sig.GetParError(0)     
+
+    Lambda=sig.GetParameter(1)    
+    Lambda_err=sig.GetParError(1)      
+
+    HV50=sig.GetParameter(2)     
+    HV50_err=sig.GetParError(2)      
+
+    HV95=sig.GetX(HV_ref)     
+    HV95_err= math.sqrt(((math.log(19)/Lambda**2)*Lambda_err)**2 + HV50_err**2) #errore HV95
+    print("Lambda = ", Lambda)
+    #check print efficiency curves fitted
+    TGraphs_list_30CO2.append(gr_E)
+    func_list_30CO2.append(sig)
+    gr_E.Draw("AP")
+    k=k+1
+    #canvas.Draw()
+    canvas.SaveAs(scan+".png")
+    canvas.SaveAs(scan+".pdf")
+
+canvas_all = TCanvas("c_all", "c_all", 0, 0, 600, 600)
+TGraphs_list_30CO2[0].GetHistogram().SetMaximum(1.4)
+TGraphs_list_30CO2[0].SetTitle("")
+TGraphs_list_30CO2[0].GetXaxis().SetTitle("HV_{eff} [V]")
+TGraphs_list_30CO2[0].GetYaxis().SetTitle("Muon Efficiency")
+TGraphs_list_30CO2[0].Draw("AP")
+TGraphs_list_30CO2[1].Draw("PSAME")
+TGraphs_list_30CO2[2].Draw("PSAME")
+TGraphs_list_30CO2[3].Draw("PSAME")
+TGraphs_list_30CO2[4].Draw("PSAME")
+
+Emax_30CO2 = []
+Emax_err_30CO2 = []
+Lambda_30CO2 = []
+Lambda_err_30CO2 = []
+HV50_30CO2 = []
+HV50_err_30CO2 = []
+HV95_30CO2 = []
+HV95_err_30CO2 = []
+
+for sig in func_list_30CO2:
+    Emax_ = 1 - math.sqrt((1 - sig.GetParameter(0)) * (1 - sig.GetParameter(0)))
+    Emax_30CO2.append(Emax_)
+    Emax_err_30CO2.append(sig.GetParError(0))     
+    Lambda_30CO2.append(sig.GetParameter(1))  
+    Lambda_err_30CO2.append(sig.GetParError(1))
+    HV50_30CO2.append(sig.GetParameter(2))  
+    HV50_err_30CO2.append(sig.GetParError(2)) 
+    HV95_30CO2.append(sig.GetX(HV_ref))
+    HV95_err_30CO2.append((math.log(19)/sig.GetParameter(1)**2)*sig.GetParError(1)+sig.GetParError(2))#errore HV95
+
+WP_30CO2 = []    
+
+for Emax_, Lambda_, HV50_ in zip(Emax_30CO2, Lambda_30CO2, HV50_30CO2):
+    WP_30CO2.append((HV50_ - math.log(1/0.95-1)/Lambda_ + 150.))
+
+txt_30CO2_22 = Features_30CO2['noiseGammaRate'][2]/(Features_30CO2['gamma_CS'][2]*1000)
+txt_30CO2_10 = Features_30CO2['noiseGammaRate'][4]/(Features_30CO2['gamma_CS'][4]*1000)
+txt_30CO2_46 = Features_30CO2['noiseGammaRate'][5]/(Features_30CO2['gamma_CS'][5]*1000)
+txt_30CO2_33 = Features_30CO2['noiseGammaRate'][7]/(Features_30CO2['gamma_CS'][7]*1000)
+    
+eff_1_30CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, no hit bkg gamma rate, Eff(WP) = {c:.0%}'.format(a=Emax_30CO2[0], b=WP_30CO2[0]/1000., c=(func_list_30CO2[0].Eval(WP_30CO2[0])));
+eff_2_30CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_30CO2[1], b=WP_30CO2[1]/1000., c=(func_list_30CO2[1].Eval(WP_30CO2[1])), d=txt_30CO2_22);
+eff_3_30CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_30CO2[2], b=WP_30CO2[2]/1000., c=(func_list_30CO2[2].Eval(WP_30CO2[2])), d=txt_30CO2_10);
+eff_4_30CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_30CO2[3], b=WP_30CO2[3]/1000., c=(func_list_30CO2[3].Eval(WP_30CO2[3])), d=txt_30CO2_46);
+eff_5_30CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_30CO2[4], b=WP_30CO2[4]/1000., c=(func_list_30CO2[4].Eval(WP_30CO2[4])), d=txt_30CO2_33);
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.10, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.1, 0.68, 0.3, 0.89);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.02376); 
+legend.AddEntry(TGraphs_list_30CO2[0], eff_1_30CO2, "P");
+legend.AddEntry(TGraphs_list_30CO2[1], eff_2_30CO2, "P");
+legend.AddEntry(TGraphs_list_30CO2[2], eff_3_30CO2, "P");
+legend.AddEntry(TGraphs_list_30CO2[3], eff_4_30CO2, "P");
+legend.AddEntry(TGraphs_list_30CO2[4], eff_5_30CO2, "P");
+legend.Draw();
+canvas_all.Draw()
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.025);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(6750, 0.43, "64% TFE + 30% CO2 + 5.0% iC4H10");
+ltx_data.DrawLatex(6750, 0.36, "+ 1.0% SF6");
+ltx_data.DrawLatex(6750, 0.29, "Test Beam in April+July 2023");
+ltx_data.DrawLatex(6750, 0.22, "1.4 mm double gap RPC");
+ltx_data.DrawLatex(6750, 0.15, "Threshold = 60 [fC]");
+
+'''
+f3 = TF1("f3", "x", 0, 1.40);
+A3 = TGaxis(5900, 0, 5900, 1.4, "f3", 510, "");
+A3.SetTitle("Muon Efficiency [%]");
+A3.SetLabelSize(0.03);
+A3.SetTitleSize(0.03);
+A3.SetTitleOffset(1.3);
+A3.Draw();
+
+f4 = TF1("f4", "x", 5.9, 7.7);
+A4 = TGaxis(5900, 0, 7700, 0, "f4", 510, "");
+A4.SetTitle("HV_{eff} [kV]");
+A4.SetLabelSize(0.03);
+A4.SetTitleSize(0.03);
+A4.Draw();
+'''
+line = TLine(5850, 1., 7750, 1.);
+line.SetLineColor(1);
+line.SetLineStyle(9);
+line.SetLineWidth(2);
+line.Draw();
+
+canvas_all.SaveAs("30CO2_Eff.png")
+canvas_all.SaveAs("30CO2_Eff.pdf")
+#canvas_all.SaveAs("Comp_AND_RPC22_SourceON_RES_CORR.pdf")
+
+TGraphs_list_40CO2 = []
+func_list_40CO2 = []
+
+canvas = TCanvas("c", "c", 564, 232, 600, 600)
+HV_ref= 95
+
+for scan, sigmoid, color, marker in scans_40CO2:
+    n = len(HVCurrentDataFrame(scans[scan])['HV_top'])
+        
+    gr_E = TGraphErrors(n, 
+                    HVCurrentDataFrame(scans[scan])['HV_top'].values, 
+                    HVCurrentDataFrame(scans[scan])['efficiency'].values,
+                    - HVCurrentDataFrame(scans[scan])['deltaV_err'].values,
+                    HVCurrentDataFrame(scans[scan])['eff_error'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+    gr_E.Fit(sigmoid) # FIT the graph with the sigmoid
+    sigmoid.SetLineColor(color)
+    gr_E.SetMarkerColor(color)
+    gr_E.SetMarkerStyle(marker)
+    #estrazione valori da fit
+    sig= gr_E.GetFunction("sigmoid"+str(k))
+    sig.SetLineColor(color)    
+
+    Emax=sig.GetParameter(0)
+    Emax_err=sig.GetParError(0)     
+
+    Lambda=sig.GetParameter(1)    
+    Lambda_err=sig.GetParError(1)      
+
+    HV50=sig.GetParameter(2)     
+    HV50_err=sig.GetParError(2)      
+
+    HV95=sig.GetX(HV_ref)     
+    HV95_err= math.sqrt(((math.log(19)/Lambda**2)*Lambda_err)**2 + HV50_err**2) #errore HV95
+    print(HV95_err)
+
+    #check print efficiency curves fitted
+    TGraphs_list_40CO2.append(gr_E)
+    func_list_40CO2.append(sig)
+    gr_E.Draw("AP")
+    k=k+1
+    #canvas.Draw()
+    canvas.SaveAs(scan+".png")
+    canvas.SaveAs(scan+".pdf")
+
+canvas_all = TCanvas("c_all", "c_all", 0, 0, 600, 600)
+TGraphs_list_40CO2[0].GetHistogram().SetMaximum(1.4)
+TGraphs_list_40CO2[0].SetTitle("")
+TGraphs_list_40CO2[0].GetXaxis().SetTitle("HV_{eff} [V]")
+TGraphs_list_40CO2[0].GetYaxis().SetTitle("Muon Efficiency")
+TGraphs_list_40CO2[0].Draw("AP")
+TGraphs_list_40CO2[1].Draw("PSAME")
+TGraphs_list_40CO2[2].Draw("PSAME")
+TGraphs_list_40CO2[3].Draw("PSAME")
+TGraphs_list_40CO2[4].Draw("PSAME")
+
+Emax_40CO2 = []
+Emax_err_40CO2 = []
+Lambda_40CO2 = []
+Lambda_err_40CO2 = []
+HV50_40CO2 = []
+HV50_err_40CO2 = []
+HV95_40CO2 = []
+HV95_err_40CO2 = []
+
+for sig in func_list_40CO2:
+    Emax_ = 1 - math.sqrt((1 - sig.GetParameter(0)) * (1 - sig.GetParameter(0)))
+    Emax_40CO2.append(Emax_)
+    Emax_err_40CO2.append(sig.GetParError(0))     
+    Lambda_40CO2.append(sig.GetParameter(1))  
+    Lambda_err_40CO2.append(sig.GetParError(1))
+    HV50_40CO2.append(sig.GetParameter(2))  
+    HV50_err_40CO2.append(sig.GetParError(2)) 
+    HV95_40CO2.append(sig.GetX(HV_ref))
+    HV95_err_40CO2.append((math.log(19)/sig.GetParameter(1)**2)*sig.GetParError(1)+sig.GetParError(2))#errore HV95
+
+WP_40CO2 = []    
+
+for Emax_, Lambda_, HV50_ in zip(Emax_40CO2, Lambda_40CO2, HV50_40CO2):
+    WP_40CO2.append((HV50_ - math.log(1/0.95-1)/Lambda_ + 150.))
+
+txt_40CO2_22 = Features_40CO2['noiseGammaRate'][1]/(Features_40CO2['gamma_CS'][1]*1000)
+txt_40CO2_10 = Features_40CO2['noiseGammaRate'][2]/(Features_40CO2['gamma_CS'][2]*1000)
+txt_40CO2_46 = Features_40CO2['noiseGammaRate'][4]/(Features_40CO2['gamma_CS'][4]*1000)
+txt_40CO2_33 = Features_40CO2['noiseGammaRate'][5]/(Features_40CO2['gamma_CS'][5]*1000)
+    
+eff_1_40CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, no hit bkg gamma rate, Eff(WP) = {c:.0%}'.format(a=Emax_40CO2[0], b=WP_40CO2[0]/1000., c=(func_list_40CO2[0].Eval(WP_40CO2[0])));
+eff_2_40CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_40CO2[1], b=WP_40CO2[1]/1000., c=(func_list_40CO2[1].Eval(WP_40CO2[1])), d=txt_40CO2_22);
+eff_3_40CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_40CO2[2], b=WP_40CO2[2]/1000., c=(func_list_40CO2[2].Eval(WP_40CO2[2])), d=txt_40CO2_10);
+eff_4_40CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_40CO2[3], b=WP_40CO2[3]/1000., c=(func_list_40CO2[3].Eval(WP_40CO2[3])), d=txt_40CO2_46);
+eff_5_40CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_40CO2[4], b=WP_40CO2[4]/1000., c=(func_list_40CO2[4].Eval(WP_40CO2[4])), d=txt_40CO2_33);
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.10, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.1, 0.68, 0.3, 0.89);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.02376); 
+legend.AddEntry(TGraphs_list_40CO2[0], eff_1_40CO2, "P");
+legend.AddEntry(TGraphs_list_40CO2[1], eff_2_40CO2, "P");
+legend.AddEntry(TGraphs_list_40CO2[2], eff_3_40CO2, "P");
+legend.AddEntry(TGraphs_list_40CO2[3], eff_4_40CO2, "P");
+legend.AddEntry(TGraphs_list_40CO2[4], eff_5_40CO2, "P");
+legend.Draw();
+canvas_all.Draw()
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.025);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(6650, 0.43, "64% TFE + 40% CO2 + 5.0% iC4H10");
+ltx_data.DrawLatex(6650, 0.36, "+ 1.0% SF6");
+ltx_data.DrawLatex(6650, 0.29, "Test Beam in April+July 2023");
+ltx_data.DrawLatex(6650, 0.22, "1.4 mm double gap RPC");
+ltx_data.DrawLatex(6650, 0.15, "Threshold = 60 [fC]");
+
+'''
+f3 = TF1("f3", "x", 0, 1.40);
+A3 = TGaxis(5900, 0, 5900, 1.4, "f3", 510, "");
+A3.SetTitle("Muon Efficiency [%]");
+A3.SetLabelSize(0.03);
+A3.SetTitleSize(0.03);
+A3.SetTitleOffset(1.3);
+A3.Draw();
+
+f4 = TF1("f4", "x", 5.9, 7.7);
+A4 = TGaxis(5900, 0, 7700, 0, "f4", 510, "");
+A4.SetTitle("HV_{eff} [kV]");
+A4.SetLabelSize(0.03);
+A4.SetTitleSize(0.03);
+A4.Draw();
+'''
+line = TLine(5850, 1., 7750, 1.);
+line.SetLineColor(1);
+line.SetLineStyle(9);
+line.SetLineWidth(2);
+line.Draw();
+
+canvas_all.SaveAs("40CO2_Eff.png")
+canvas_all.SaveAs("40CO2_Eff.pdf")
+#canvas_all.SaveAs("Comp_AND_RPC22_SourceON_RES_CORR.pdf")
+
+TGraphs_list_30CO205SF6 = []
+func_list_30CO205SF6 = []
+
+canvas = TCanvas("c", "c", 564, 232, 600, 600)
+HV_ref= 95
+k=16
+for scan, sigmoid, color, marker in scans_30CO205SF6:
+    n = len(HVCurrentDataFrame(scans[scan])['HV_top'])
+        
+    gr_E = TGraphErrors(n, 
+                    HVCurrentDataFrame(scans[scan])['HV_top'].values, 
+                    HVCurrentDataFrame(scans[scan])['efficiency'].values,
+                    HVCurrentDataFrame(scans[scan])['deltaV_err'].values,
+                    HVCurrentDataFrame(scans[scan])['eff_error'].values) #values from df[].values to convert dataframe object in array suitable for the tgraph
+    gr_E.Fit(sigmoid) # FIT the graph with the sigmoid
+    sigmoid.SetLineColor(color)
+    gr_E.SetMarkerColor(color)
+    gr_E.SetMarkerStyle(marker)
+    #estrazione valori da fit
+    sig= gr_E.GetFunction("sigmoid"+str(k))
+    sig.SetLineColor(color)    
+
+    Emax=sig.GetParameter(0)
+    Emax_err=sig.GetParError(0)     
+
+    Lambda=sig.GetParameter(1)    
+    Lambda_err=sig.GetParError(1)      
+
+    HV50=sig.GetParameter(2)     
+    HV50_err=sig.GetParError(2)      
+
+    HV95=sig.GetX(HV_ref)     
+    HV95_err= math.sqrt(((math.log(19)/Lambda**2)*Lambda_err)**2 + HV50_err**2) #errore HV95
+    print(HV95_err)
+    #check print efficiency curves fitted
+    TGraphs_list_30CO205SF6.append(gr_E)
+    func_list_30CO205SF6.append(sig)
+    gr_E.Draw("AP")
+    k=k+1
+    #canvas.Draw()
+    canvas.SaveAs(scan+".png")
+    canvas.SaveAs(scan+".pdf")
+
+canvas_all = TCanvas("c_all", "c_all", 0, 0, 600, 600)
+TGraphs_list_30CO205SF6[0].GetHistogram().SetMaximum(1.4)
+TGraphs_list_30CO205SF6[0].SetTitle("")
+TGraphs_list_30CO205SF6[0].GetXaxis().SetTitle("HV_{eff} [V]")
+TGraphs_list_30CO205SF6[0].GetYaxis().SetTitle("Muon Efficiency")
+TGraphs_list_30CO205SF6[0].Draw("AP")
+TGraphs_list_30CO205SF6[1].Draw("PSAME")
+TGraphs_list_30CO205SF6[2].Draw("PSAME")
+TGraphs_list_30CO205SF6[3].Draw("PSAME")
+TGraphs_list_30CO205SF6[4].Draw("PSAME")
+
+Emax_30CO205SF6 = []
+Emax_err_30CO205SF6 = []
+Lambda_30CO205SF6 = []
+Lambda_err_30CO205SF6 = []
+HV50_30CO205SF6 = []
+HV50_err_30CO205SF6 = []
+HV95_30CO205SF6 = []
+HV95_err_30CO205SF6 = []
+
+for sig in func_list_30CO205SF6:
+    Emax_ = 1 - math.sqrt((1 - sig.GetParameter(0)) * (1 - sig.GetParameter(0)))
+    Emax_30CO205SF6.append(Emax_)
+    Emax_err_30CO205SF6.append(sig.GetParError(0))     
+    Lambda_30CO205SF6.append(sig.GetParameter(1))  
+    Lambda_err_30CO205SF6.append(sig.GetParError(1))
+    HV50_30CO205SF6.append(sig.GetParameter(2))  
+    HV50_err_30CO205SF6.append(sig.GetParError(2)) 
+    HV95_30CO205SF6.append(sig.GetX(HV_ref))
+    HV95_err_30CO205SF6.append((math.log(19)/sig.GetParameter(1)**2)*sig.GetParError(1)+sig.GetParError(2))#errore HV95
+
+WP_30CO205SF6 = []    
+
+for Emax_, Lambda_, HV50_ in zip(Emax_30CO205SF6, Lambda_30CO205SF6, HV50_30CO205SF6):
+    WP_30CO205SF6.append((HV50_ - math.log(1/0.95-1)/Lambda_ + 150.))
+
+
+txt_30CO205SF6_22 = Features_30CO205SF6['noiseGammaRate'][1]/(Features_30CO205SF6['gamma_CS'][1]*1000)
+txt_30CO205SF6_10 = Features_30CO205SF6['noiseGammaRate'][2]/(Features_30CO205SF6['gamma_CS'][2]*1000)
+txt_30CO205SF6_46 = Features_30CO205SF6['noiseGammaRate'][4]/(Features_30CO205SF6['gamma_CS'][4]*1000)
+txt_30CO205SF6_33 = Features_30CO205SF6['noiseGammaRate'][5]/(Features_30CO205SF6['gamma_CS'][5]*1000)
+    
+eff_1_30CO205SF6 = 'plateau = {a:.0%}, WP = {b:.2f} kV, no hit bkg gamma rate, Eff(WP) = {c:.0%}'.format(a=Emax_30CO205SF6[0], b=WP_30CO205SF6[0]/1000., c=(func_list_30CO205SF6[0].Eval(WP_30CO205SF6[0])));
+eff_2_30CO205SF6 = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_30CO205SF6[1], b=WP_30CO205SF6[1]/1000., c=(func_list_30CO205SF6[1].Eval(WP_30CO205SF6[1])), d=txt_30CO205SF6_22 );
+eff_3_30CO205SF6 = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_30CO205SF6[2], b=WP_30CO205SF6[2]/1000., c=(func_list_30CO205SF6[2].Eval(WP_30CO205SF6[2])), d=txt_30CO205SF6_10 );
+eff_4_30CO205SF6 = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_30CO205SF6[3], b=WP_30CO205SF6[3]/1000., c=(func_list_30CO205SF6[3].Eval(WP_30CO205SF6[3])), d=txt_30CO205SF6_46 );
+eff_5_30CO205SF6 = 'plateau = {a:.0%}, WP = {b:.2f} kV, bkg rate (WP) = {d:.1f} kHz/cm2, Eff(WP) = {c:.0%}'.format(a=Emax_30CO205SF6[4], b=WP_30CO205SF6[4]/1000., c=(func_list_30CO205SF6[4].Eval(WP_30CO205SF6[4])), d=txt_30CO205SF6_33 );
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.10, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.1, 0.68, 0.3, 0.89);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.02376); 
+legend.AddEntry(TGraphs_list_30CO205SF6[0], eff_1_30CO205SF6, "P");
+legend.AddEntry(TGraphs_list_30CO205SF6[1], eff_2_30CO205SF6, "P");
+legend.AddEntry(TGraphs_list_30CO205SF6[2], eff_3_30CO205SF6, "P");
+legend.AddEntry(TGraphs_list_30CO205SF6[3], eff_4_30CO205SF6, "P");
+legend.AddEntry(TGraphs_list_30CO205SF6[4], eff_5_30CO205SF6, "P");
+legend.Draw();
+canvas_all.Draw()
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.025);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(6600, 0.43, "64% TFE + 30% CO2 + 5.0% iC4H10");
+ltx_data.DrawLatex(6600, 0.36, "+ 0.5% SF6");
+ltx_data.DrawLatex(6600, 0.29, "Test Beam in April+July 2023");
+ltx_data.DrawLatex(6600, 0.22, "1.4 mm double gap RPC");
+ltx_data.DrawLatex(6600, 0.15, "Threshold = 60 [fC]");
+
+
+'''
+f3 = TF1("f3", "x", 0, 1.40);
+A3 = TGaxis(5900, 0, 5900, 1.4, "f3", 510, "");
+A3.SetTitle("Muon Efficiency [%]");
+A3.SetLabelSize(0.03);
+A3.SetTitleSize(0.03);
+A3.SetTitleOffset(1.3);
+A3.Draw();
+
+f4 = TF1("f4", "x", 5.9, 7.7);
+A4 = TGaxis(5900, 0, 7700, 0, "f4", 510, "");
+A4.SetTitle("HV_{eff} [kV]");
+A4.SetLabelSize(0.03);
+A4.SetTitleSize(0.03);
+A4.Draw();
+'''
+line = TLine(5850, 1., 7440, 1.);
+line.SetLineColor(1);
+line.SetLineStyle(9);
+line.SetLineWidth(2);
+line.Draw();
+
+canvas_all.SaveAs("30CO205SF6_Eff.png")
+canvas_all.SaveAs("30CO205SF6_Eff.pdf")
+#canvas_all.SaveAs("Comp_AND_RPC22_SourceON_RES_CORR.pdf")
+
+canvas = TCanvas("c", "c", 564, 232, 600, 600)
+
+print(Features_40CO2['WP'].values/1000)
+print(Features_40CO2['WP_err'].values/1000)
+    
+_40CO2 = TGraphErrors(6, 
+                   Features_40CO2['noiseGammaRate'].values/(Features_40CO2['gamma_CS'].values*1000), 
+                   Features_40CO2['WP'].values/1000,
+                   0,
+                   Features_40CO2['WP_err'].values/1000) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_40CO2.SetMarkerColor(2)
+_40CO2.SetMarkerStyle(20)
+
+_30CO2 = TGraphErrors(6, 
+                   Features_30CO2['noiseGammaRate'].values/(Features_30CO2['gamma_CS'].values*1000), 
+                   Features_30CO2['WP'].values/1000,
+                   0,
+                   Features_30CO2['WP_err'].values/1000) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO2.SetMarkerColor(4)
+_30CO2.SetMarkerStyle(21)
+
+_30CO205SF6 = TGraphErrors(6, 
+                   Features_30CO205SF6['noiseGammaRate'].values/(Features_30CO205SF6['gamma_CS'].values*1000), 
+                   Features_30CO205SF6['WP'].values/1000,
+                   0,
+                   Features_30CO205SF6['WP_err'].values/1000) #values from df[].values to convert dataframe object in array suitable for the tgraph
+_30CO205SF6.SetMarkerColor(6)
+_30CO205SF6.SetMarkerStyle(22)
+
+STDMX = TGraphErrors(6, 
+                   Features_STDMX['noiseGammaRate'].values/(Features_STDMX['gamma_CS'].values*1000), 
+                   np.array(WP_STDMX)/1000,
+                   0,
+                   np.array(HV95_err)/1000) #values from df[].values to convert dataframe object in array suitable for the tgraph
+STDMX.SetMarkerColor(1)
+STDMX.SetMarkerStyle(34)
+
+
+_40CO2.GetHistogram().SetMaximum(7.5)
+_40CO2.SetTitle("")
+_40CO2.GetXaxis().SetTitle("Background gamma rate [kHz/cm2]")
+_40CO2.GetYaxis().SetTitle("Working Point (kV)")
+_40CO2.GetYaxis().SetTitleOffset(1.5)
+_40CO2.GetYaxis().SetRangeUser(6.88, 7.5)
+_40CO2.Draw("AP")
+_30CO2.Draw("PSAME")
+_30CO205SF6.Draw("PSAME")
+STDMX.Draw("PSAME")
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.10, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.12, 0.72, 0.3, 0.89);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.025); 
+legend.AddEntry(STDMX, "95.2% TFE + 4.5% iC4H10 + 0.3% SF6", "P");
+legend.AddEntry(_30CO2, "64% TFE + 30% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_40CO2, "54% TFE + 40% CO2 + 5.0% iC4H10 + 1.0% SF6", "P");
+legend.AddEntry(_30CO205SF6, "64.5% TFE + 30% CO2 + 5.0% iC4H10 + 0.5% SF6", "P");
+legend.Draw();
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.03);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(0.8, 7.345, "Test Beam in April+July 2023");
+ltx_data.DrawLatex(0.8, 7.32, "1.4 mm double gap RPC");
+ltx_data.DrawLatex(0.8, 7.295, "Threshold = 60 [fC]");
+ltx_data.Draw()
+
+canvas.Draw()
+canvas.SaveAs("WP.png")
+canvas.SaveAs("WP.pdf")
+
+canvas_all = TCanvas("c_all", "c_all", 0, 0, 600, 600)
+TGraphs_list_STDMX[0].GetXaxis().SetTitle("HV_{eff} [V]")
+TGraphs_list_STDMX[0].Draw("AP")
+TGraphs_list_30CO2[0].SetMarkerColor(2)
+TGraphs_list_30CO2[0].SetMarkerStyle(22)
+func_list_30CO2[0].SetLineColor(2)
+
+TGraphs_list_30CO205SF6[0].SetMarkerColor(1)
+TGraphs_list_30CO205SF6[0].SetMarkerStyle(23)
+func_list_30CO205SF6[0].SetLineColor(1)
+
+TGraphs_list_40CO2[0].SetMarkerColor(4)
+TGraphs_list_40CO2[0].SetMarkerStyle(34)
+func_list_40CO2[0].SetLineColor(4)
+TGraphs_list_30CO2[0].Draw("PSAME")
+TGraphs_list_30CO205SF6[0].Draw("PSAME")
+TGraphs_list_40CO2[0].Draw("PSAME")
+
+eff_STDMX = 'plateau = {a:.0%}, WP = {b:.2f} kV, standard gas mixture, Eff(WP) = {c:.0%}'.format(a=Emax_STDMX[0], b=WP_STDMX[0]/1000., c=(func_list_STDMX[0].Eval(WP_STDMX[0])));
+eff_30CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, +30% CO2 & 1.0% SF6, Eff(WP) = {c:.0%}'.format(a=Emax_30CO2[0], b=WP_30CO2[0]/1000., c=(func_list_30CO2[0].Eval(WP_30CO2[0])));
+eff_30CO205SF6 = 'plateau = {a:.0%}, WP = {b:.2f} kV, +30% CO2 & 0.5% SF6, Eff(WP) = {c:.0%}'.format(a=Emax_30CO205SF6[0], b=WP_30CO205SF6[0]/1000., c=(func_list_30CO205SF6[0].Eval(WP_30CO205SF6[0])));
+eff_40CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, +40% CO2 & 1.0% SF6, Eff(WP) = {c:.0%}'.format(a=Emax_40CO2[0], b=WP_40CO2[0]/1000., c=(func_list_40CO2[0].Eval(WP_40CO2[0])));
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.10, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.1, 0.68, 0.3, 0.89);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.02376); 
+legend.AddEntry(TGraphs_list_STDMX[0], eff_STDMX, "P");
+legend.AddEntry(TGraphs_list_30CO2[0], eff_30CO2, "P");
+legend.AddEntry(TGraphs_list_30CO205SF6[0], eff_30CO205SF6, "P");
+legend.AddEntry(TGraphs_list_40CO2[0], eff_40CO2, "P");
+legend.Draw();
+canvas_all.Draw()
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.025);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(7000, 0.43, "No gamma hit background");
+ltx_data.DrawLatex(7000, 0.36, "Test Beam in April+July 2023");
+ltx_data.DrawLatex(7000, 0.29, "1.4 mm double gap RPC");
+ltx_data.DrawLatex(7000, 0.22, "Threshold = 60 [fC]");
+'''
+f3 = TF1("f3", "x", 0, 1.40);
+A3 = TGaxis(5900, 0, 5900, 1.4, "f3", 510, "");
+A3.SetTitle("Muon Efficiency [%]");
+A3.SetLabelSize(0.03);
+A3.SetTitleSize(0.03);
+A3.SetTitleOffset(1.3);
+A3.Draw();
+
+f4 = TF1("f4", "x", 5.9, 7.7);
+A4 = TGaxis(5900, 0, 7700, 0, "f4", 510, "");
+A4.SetTitle("HV_{eff} [kV]");
+A4.SetLabelSize(0.03);
+A4.SetTitleSize(0.03);
+A4.Draw();
+'''
+line = TLine(5850, 1., 7650, 1.);
+line.SetLineColor(1);
+line.SetLineStyle(9);
+line.SetLineWidth(2);
+line.Draw();
+
+canvas_all.SaveAs("Eff_OFF.png")
+canvas_all.SaveAs("Eff_OFF.pdf")
+#canvas_all.SaveAs("Comp_AND_RPC22_SourceON_RES_CORR.pdf")
+
+canvas_all = TCanvas("c_all", "c_all", 0, 0, 600, 600)
+TGraphs_list_STDMX[3].GetHistogram().SetMaximum(1.4)
+TGraphs_list_STDMX[3].SetTitle("")
+TGraphs_list_STDMX[3].GetXaxis().SetTitle("HV_{eff} [V]")
+TGraphs_list_STDMX[3].GetYaxis().SetTitle("Muon Efficiency")
+TGraphs_list_STDMX[3].SetMarkerColor(6)
+TGraphs_list_STDMX[3].SetMarkerStyle(23)
+func_list_STDMX[3].SetLineColor(6)
+TGraphs_list_STDMX[3].Draw("AP")
+TGraphs_list_30CO2[3].SetMarkerColor(2)
+TGraphs_list_30CO2[3].SetMarkerStyle(22)
+func_list_30CO2[3].SetLineColor(2)
+
+TGraphs_list_30CO205SF6[3].SetMarkerColor(1)
+TGraphs_list_30CO205SF6[3].SetMarkerStyle(23)
+func_list_30CO205SF6[3].SetLineColor(1)
+
+TGraphs_list_40CO2[3].SetMarkerColor(4)
+TGraphs_list_40CO2[3].SetMarkerStyle(34)
+func_list_40CO2[3].SetLineColor(4)
+TGraphs_list_30CO2[3].Draw("PSAME")
+TGraphs_list_40CO2[3].Draw("PSAME")
+TGraphs_list_30CO205SF6[3].Draw("PSAME")
+
+eff_STDMX = 'plateau = {a:.0%}, WP = {b:.2f} kV, standard gas mixture, Eff(WP) = {c:.0%}'.format(a=Emax_STDMX[3], b=WP_STDMX[3]/1000., c=(func_list_STDMX[3].Eval(WP_STDMX[3])));
+eff_30CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, +30% CO2 & 1.0% SF6, Eff(WP) = {c:.0%}'.format(a=Emax_30CO2[3], b=WP_30CO2[3]/1000., c=(func_list_30CO2[3].Eval(WP_30CO2[3])));
+eff_30CO205SF6 = 'plateau = {a:.0%}, WP = {b:.2f} kV, +30% CO2 & 0.5% SF6, Eff(WP) = {c:.0%}'.format(a=Emax_30CO205SF6[3], b=WP_30CO205SF6[3]/1000., c=(func_list_30CO205SF6[3].Eval(WP_30CO205SF6[3])));
+eff_40CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, +40% CO2 & 1.0% SF6, Eff(WP) = {c:.0%}'.format(a=Emax_40CO2[3], b=WP_40CO2[3]/1000., c=(func_list_40CO2[3].Eval(WP_40CO2[3])));
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.10, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.1, 0.68, 0.3, 0.89);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.02376); 
+legend.AddEntry(TGraphs_list_STDMX[3], eff_STDMX, "P");
+legend.AddEntry(TGraphs_list_30CO2[3], eff_30CO2, "P");
+legend.AddEntry(TGraphs_list_30CO205SF6[3], eff_30CO205SF6, "P");
+legend.AddEntry(TGraphs_list_40CO2[3], eff_40CO2, "P");
+legend.Draw();
+canvas_all.Draw()
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.025);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(6900, 0.43, "Hit bkg rate @ WP ~ 1.0 kHz/cm^{2}");
+ltx_data.DrawLatex(6900, 0.36, "Test Beam in April+July 2023");
+ltx_data.DrawLatex(6900, 0.29, "1.4 mm double gap RPC");
+ltx_data.DrawLatex(6900, 0.22, "Threshold = 60 [fC]");
+'''
+f3 = TF1("f3", "x", 0, 1.40);
+A3 = TGaxis(5900, 0, 5900, 1.4, "f3", 510, "");
+A3.SetTitle("Muon Efficiency [%]");
+A3.SetLabelSize(0.03);
+A3.SetTitleSize(0.03);
+A3.SetTitleOffset(1.3);
+A3.Draw();
+
+f4 = TF1("f4", "x", 5.9, 7.7);
+A4 = TGaxis(5900, 0, 7700, 0, "f4", 510, "");
+A4.SetTitle("HV_{eff} [kV]");
+A4.SetLabelSize(0.03);
+A4.SetTitleSize(0.03);
+A4.Draw();
+'''
+line = TLine(5850, 1., 7650, 1.);
+line.SetLineColor(1);
+line.SetLineStyle(9);
+line.SetLineWidth(2);
+line.Draw();
+
+canvas_all.SaveAs("Eff_4-6.png")
+canvas_all.SaveAs("Eff_4-6.pdf")
+#canvas_all.SaveAs("Comp_AND_RPC22_SourceON_RES_CORR.pdf")
+
+canvas_all = TCanvas("c_all", "c_all", 0, 0, 600, 600)
+TGraphs_list_STDMX[4].GetHistogram().SetMaximum(1.4)
+TGraphs_list_STDMX[4].SetTitle("")
+TGraphs_list_STDMX[4].GetXaxis().SetTitle("HV_{eff} [V]")
+TGraphs_list_STDMX[4].GetYaxis().SetTitle("Muon Efficiency")
+TGraphs_list_STDMX[4].SetMarkerColor(6)
+TGraphs_list_STDMX[4].SetMarkerStyle(23)
+func_list_STDMX[4].SetLineColor(6)
+TGraphs_list_STDMX[4].Draw("AP")
+
+TGraphs_list_30CO2[4].SetMarkerColor(2)
+TGraphs_list_30CO2[4].SetMarkerStyle(22)
+func_list_30CO2[4].SetLineColor(2)
+TGraphs_list_30CO205SF6[4].SetMarkerColor(1)
+TGraphs_list_30CO205SF6[4].SetMarkerStyle(23)
+func_list_30CO205SF6[4].SetLineColor(1)
+
+TGraphs_list_40CO2[4].SetMarkerColor(4)
+TGraphs_list_40CO2[4].SetMarkerStyle(34)
+func_list_40CO2[4].SetLineColor(4)
+TGraphs_list_30CO2[4].Draw("PSAME")
+TGraphs_list_40CO2[4].Draw("PSAME")
+TGraphs_list_30CO205SF6[4].Draw("PSAME")
+
+eff_STDMX = 'plateau = {a:.0%}, WP = {b:.2f} kV, standard gas mixture, Eff(WP) = {c:.0%}'.format(a=Emax_STDMX[4], b=WP_STDMX[4]/1000., c=(func_list_STDMX[4].Eval(WP_STDMX[4])));
+eff_30CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, +30% CO2 & 1.0% SF6, Eff(WP) = {c:.0%}'.format(a=Emax_30CO2[4], b=WP_30CO2[4]/1000., c=(func_list_30CO2[4].Eval(WP_30CO2[4])));
+eff_30CO205SF6 = 'plateau = {a:.0%}, WP = {b:.2f} kV, +30% CO2 & 0.5% SF6, Eff(WP) = {c:.0%}'.format(a=Emax_30CO205SF6[4], b=WP_30CO205SF6[4]/1000., c=(func_list_30CO205SF6[4].Eval(WP_30CO205SF6[4])));
+eff_40CO2 = 'plateau = {a:.0%}, WP = {b:.2f} kV, +40% CO2 & 1.0% SF6, Eff(WP) = {c:.0%}'.format(a=Emax_40CO2[4], b=WP_40CO2[4]/1000., c=(func_list_40CO2[4].Eval(WP_40CO2[4])));
+
+cms_tex = TLatex();
+cms_tex.SetNDC();
+cms_tex.SetTextFont(61);
+cms_tex.SetTextSize(0.04);
+cms_tex.SetLineWidth(2);
+cms_tex.DrawLatex(0.10, 0.905, "CMS MUON");
+
+cms_tex_1 = TLatex();
+cms_tex_1.SetNDC();
+cms_tex_1.SetTextFont(61);
+cms_tex_1.SetTextSize(0.04);
+cms_tex_1.SetLineWidth(2);
+cms_tex_1.DrawLatex(0.79, 0.905, "GIF++");
+
+cms_tex_2 = TLatex();
+cms_tex_2.SetNDC();
+cms_tex_2.SetTextFont(52);
+cms_tex_2.SetTextSize(0.04);
+cms_tex_2.SetLineWidth(2);
+cms_tex_2.DrawLatex(0.32, 0.905, "Preliminary");
+
+legend = TLegend(0.1, 0.68, 0.3, 0.89);
+legend.SetTextFont(42);
+legend.SetBorderSize(0); 
+legend.SetFillStyle(4000);
+legend.SetFillColor(0);  
+legend.SetTextSize(0.02376); 
+legend.AddEntry(TGraphs_list_STDMX[4], eff_STDMX, "P");
+legend.AddEntry(TGraphs_list_30CO2[4], eff_30CO2, "P");
+legend.AddEntry(TGraphs_list_30CO205SF6[4], eff_30CO205SF6, "P");
+legend.AddEntry(TGraphs_list_40CO2[4], eff_40CO2, "P");
+legend.Draw();
+canvas_all.Draw()
+
+ltx_data = TLatex()
+ltx_data.SetTextFont(42);
+ltx_data.SetTextSize(0.025);
+ltx_data.SetTextColor(1);
+ltx_data.DrawLatex(6900, 0.43, "Hit bkg rate @ WP ~ 1.5 kHz/cm^{2}");
+ltx_data.DrawLatex(6900, 0.36, "Test Beam in April+July 2023");
+ltx_data.DrawLatex(6900, 0.29, "1.4 mm double gap RPC");
+ltx_data.DrawLatex(6900, 0.22, "Threshold = 60 [fC]");
+'''
+f3 = TF1("f3", "x", 0, 1.40);
+A3 = TGaxis(5900, 0, 5900, 1.4, "f3", 510, "");
+A3.SetTitle("Muon Efficiency [%]");
+A3.SetLabelSize(0.03);
+A3.SetTitleSize(0.03);
+A3.SetTitleOffset(1.3);
+A3.Draw();
+
+f4 = TF1("f4", "x", 5.9, 7.7);
+A4 = TGaxis(5900, 0, 7700, 0, "f4", 510, "");
+A4.SetTitle("HV_{eff} [kV]");
+A4.SetLabelSize(0.03);
+A4.SetTitleSize(0.03);
+A4.Draw();
+'''
+line = TLine(5850, 1., 7750, 1.);
+line.SetLineColor(1);
+line.SetLineStyle(9);
+line.SetLineWidth(2);
+line.Draw();
+
+canvas_all.SaveAs("Eff_3-3.png")
+canvas_all.SaveAs("Eff_3-3.pdf")
+#canvas_all.SaveAs("Comp_AND_RPC22_SourceON_RES_CORR.pdf")
+
+print(HVCurrentDataFrame(scans['STDMX_OFF']))
+print(HVCurrentDataFrame(scans['30CO2_OFF']))
+print(HVCurrentDataFrame(scans['40CO2_OFF']))
+print(HVCurrentDataFrame(scans['STDMX_22']))
+print(HVCurrentDataFrame(scans['30CO2_22']))
+print(HVCurrentDataFrame(scans['40CO2_22']))
+print(HVCurrentDataFrame(scans['STDMX_3.3']))
+print(HVCurrentDataFrame(scans['30CO2_3.3']))
+print(HVCurrentDataFrame(scans['40CO2_3.3']))
+
+
