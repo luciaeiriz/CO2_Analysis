@@ -1,5 +1,6 @@
 CO2 Analysis codes:
 --------------------------------------------------------------------------------------------------
+
 Before analysis:
 
 make sure scans are inside a folder in the same directory as the scripts
@@ -7,7 +8,9 @@ change the directory paths if need be on the codes (to retrive and store data/pl
 update the scan names in the 'extract_data.py' script with the apropiate ones that you are planing on analyzing
 run the 'bckg_calculation.py', this will give you the gamma background rates at WP for each scan
 
+
 For plot scripts:
+
 'eff_plot' scripts will generate the efficiency plots (% efficincy at each HV point) for the selected scans
 'gammacs_plot' script gives the gamma cluster size vs HV for the selected scans
 
