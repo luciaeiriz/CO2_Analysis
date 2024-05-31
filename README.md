@@ -1,6 +1,7 @@
 CO2 Analysis codes:
 --------------------------------------------------------------------------------------------------
 Before analysis:
+
 make sure scans are inside a folder in the same directory as the scripts
 change the directory paths if need be on the codes (to retrive and store data/plots)
 update the scan names in the 'extract_data.py' script with the apropiate ones that you are planing on analyzing
