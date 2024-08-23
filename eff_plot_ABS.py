@@ -8,7 +8,6 @@ import numpy as np
 import math
 import mplhep as hep
 from extract_data import data
-from datetime import datetime
 
 """"
 Before running the scripit: 
@@ -19,7 +18,7 @@ Before running the scripit:
 #Fonts
 font0 = {'family': 'DejaVu Sans',
             'weight': 'bold',
-            'size': 34,
+            'size': 38,
             } # for plot title
 font1 = {'family': 'DejaVu Sans',
             'weight': 'normal',
@@ -27,15 +26,15 @@ font1 = {'family': 'DejaVu Sans',
             } # for text info
 font2 = {'family': 'DejaVu Sans',
             'weight': 'bold',
-            'size': 15,
+            'size': 17,
             } # for legend
 
 markers = ['o', '^', 's', '*', 'd']
 colors = ['black', 'magenta', 'red', 'blue', 'green']
-mixtures = {"30CO2" : "30% CO2 + 1% SF6",
+mixtures = {"30CO2" : "30% CO2 + 1.0% SF6",
             "30CO205SF6" : "30% CO2 + 0.5% SF6",
-            "40CO2" : "40% CO2 + 1% SF6",
-            "STDMX" : "Standard Mixture"
+            "40CO2" : "40% CO2 + 1.0% SF6",
+            "STDMX" : "Standard gas mixture"
 }
 
 def find_index_of_value(HV, target_value):
@@ -54,7 +53,20 @@ def find_index_of_value(HV, target_value):
                 decremented_value -= 100
         print("No corresponding value found in HV column.")
         return None
-        
+
+def read_data(filename):
+    background_rates = {}
+    with open(filename, 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader)  # Skip the header row
+        for row in reader:
+            scan_name,hv_str,current_top_str,current_bot_str,muoncs_str,gammacs_str,muoncs_err_str,gammacs_err_str,eff_str,eff_err,noiseGammaRate,current_str,background_rate_str,gamma_charge_str,gamma_charge_err_str=row
+            wp = float(hv_str) / 1000
+            background_rate = float(background_rate_str)
+            if scan_name not in background_rates:
+                background_rates[scan_name] = []
+            background_rates[scan_name].append((wp, background_rate))
+    return background_rates    
 
 def plot_scan(scan):
     HV = data['HV'][scan]
@@ -62,7 +74,6 @@ def plot_scan(scan):
     err = data['err'][scan]
     noise_gamma = data['noise_gamma'][scan]
     gamma_cs = data['gamma_cs'][scan]
-
 
     def func(HV, E, L, H):
         return E / (1 + np.exp(L * (H - HV)))
@@ -79,7 +90,6 @@ def plot_scan(scan):
     a = round(E * 100)
     b = WP / 1000
     c = round(eff_WP * 100) 
-    
 
     if scan not in plot_scan_colors:
         color = plot_scan_colors[scan] = colors[len(plot_scan_colors) % len(colors)]
@@ -94,20 +104,21 @@ def plot_scan(scan):
     d = mixtures.get(mixture, f"Gas mixture: {mixture}")
 
     label = f"{d}, plateau = {a} %, WP = {b:.2f} kV, Eff(WP) = {c} %"
-    plt.errorbar(HV, eff, yerr=err, fmt=marker, markersize=9, color=color, label=label)
+    plt.errorbar(HV, eff, yerr=err, fmt=marker, markersize=11, color=color, label=label)
 
     x = np.linspace(min(HV), max(HV), 100)
     y = func(x, E, L, H)
     plt.plot(x, y, linewidth=3, color=color)
-
+    
+background_rates = read_data('2024_data_atWP.csv')
 plot_scan_colors = {}
 plot_scan_markers = {}
 
 #Setting the plot
 hep.style.use("CMS")
 figure, ax = plt.subplots(figsize=(13, 13))
-plt.xlabel(r'HV$_{\mathrm{eff}}$ [kV]', fontsize=36)
-plt.ylabel('Muon efficiency [%]', fontsize=36)
+plt.xlabel(r'HV$_{\mathrm{eff}}$ [V]', fontsize=36)
+plt.ylabel('Muon efficiency', fontsize=36)
 plt.grid(ls='--')
 
 ax.xaxis.set_major_locator(AutoLocator())
@@ -118,7 +129,7 @@ ax.tick_params(which='major', direction='in', length=10, width=2.0, labelsize=12
 ax.tick_params(which='minor', direction='in', length=5, width=1.0)
 plt.yticks(fontproperties='DejaVu Sans', size=20, weight='bold')  
 plt.xticks(fontproperties='DejaVu Sans', size=20, weight='bold') 
-plt.xlim(6050, 7550)
+plt.xlim(5800, 7400)
 plt.ylim(0, 1.2)
 
 # Input scan names from user
@@ -132,15 +143,25 @@ for scan in scans:
 if not os.path.exists('Plots_2024/'):
     os.makedirs('Plots_2024/')
 
-# Plotting 
-label = "ABS filter: 1" #change label accordingly ABS + TB date
-ax.text(0.025, 0.75, label + "\nTest Beam April 2024 \nThreshold =  60 [fC] \n1.4 mm double gap RPC", transform=ax.transAxes, verticalalignment='top', horizontalalignment='left', fontsize=16)
+stdmx_background_rate = "N/A"
+for scan in scans:
+    scan = scan.strip()
+    if 'STDMX' in scan:
+        stdmx_background_rate = background_rates.get(scan, [(None, "N/A")])[0][1]
+        break
 
-plt.text(7300, 1.21+0.01, "GIF++", font0)
+# Plotting 
+label = f"Background rate: {stdmx_background_rate:.2f} kHz/cm²"
+#label = "No gamma background"
+ax.text(0.025, 0.8, label + "\nTest Beam April 2024 \nThreshold: 60 fC \n1.4 mm double gap RPC", transform=ax.transAxes, verticalalignment='top', horizontalalignment='left', fontsize=24)
+
+plt.text(7050, 1.21+0.01, "GIF++", font0)
 hep.cms.text("Preliminary", fontsize=32)
 plt.legend(loc='upper left', prop=font2, frameon=False)
 plt.axhline(y=1, color='black', linestyle='--')
 plt.savefig(os.path.join('Plots_2024/' + name + ".png"))
 
 #plt.show()
+
+
 
