@@ -6,7 +6,7 @@
 
 1. Make sure scans are inside a folder in the same directory as the scripts.
 2. Change the directory paths in the code if needed to retrieve and store data/plots.
-3. Update the scan names in the `extract_data.py` script with the appropriate ones that you are planning to analyze.
+3. Update the scan names in the `extract_data.py` script with the appropriate ones that you are planning to analyze (2023 ir 2024 data).
 4. Run the `bckg_calculation.py` script; this will give you the gamma background rates at WP for each scan.
 
 ## For Plot Scripts
